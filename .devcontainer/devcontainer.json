@@ -1,0 +1,16 @@
+{
+  "name": "Smart Campus (Java + MySQL)",
+  "dockerComposeFile": "compose.yaml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/smart-campus",
+  "initializeCommand": "bash .devcontainer/init-secrets.sh",
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": { "label": "Smart Campus", "onAutoForward": "notify", "visibility": "private" }
+  },
+  "customizations": {
+    "vscode": { "extensions": ["vscjava.vscode-java-pack"] }
+  },
+  "shutdownAction": "stopCompose"
+}

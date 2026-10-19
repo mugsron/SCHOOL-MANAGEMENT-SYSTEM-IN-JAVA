@@ -1,0 +1,5 @@
+# Generated Codespaces credentials: never commit these files.
+.devcontainer/app.env
+.devcontainer/db.env
+# Development copy extracted from the tracked archive.
+/smart-campus/

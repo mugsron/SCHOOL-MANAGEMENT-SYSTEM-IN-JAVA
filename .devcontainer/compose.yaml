@@ -1,0 +1,26 @@
+services:
+  app:
+    build: .
+    command: sleep infinity
+    volumes:
+      - ..:/workspaces/smart-campus:cached
+      - maven-cache:/root/.m2
+    working_dir: /workspaces/smart-campus
+    env_file: app.env
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mysql:8.4
+    env_file: db.env
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=\"$$MYSQL_PASSWORD\" mysql --protocol=TCP -h 127.0.0.1 -u smartcampus smartcampus -e 'SELECT 1' >/dev/null 2>&1"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+      start_period: 30s
+volumes:
+  mysql-data:
+  maven-cache:
